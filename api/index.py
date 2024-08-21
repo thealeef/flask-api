@@ -2,10 +2,12 @@ from flask import Flask
 
 app = Flask(__name__)
 
-@app.route('/')
-def home():
-    return 'Hello, World!'
 
-@app.route('/about')
-def about():
-    return 'About'
+@app.route("/")
+def Inicio():
+    return "API Funcionando"
+
+
+@app.route("/api")
+def API():
+    return "About"
