@@ -21,4 +21,4 @@ def funcionarios():
         {"id": 4, "nomeCompleto": "Teste D", "nomeMae": "Mae Teste D"},
     ]
 
-    return jsonify(listaFuncionarios)
+    return listaFuncionarios
