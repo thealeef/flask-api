@@ -50,6 +50,7 @@ def chamaFuncionarios():
 def addFuncionario(funcionario):
 
     funcionario = json.loads(funcionario)
+
     # Adicionamos ao dicionario da API
     listaFuncionarios.append(funcionario)
 
