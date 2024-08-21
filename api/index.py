@@ -1,6 +1,16 @@
-from flask import Flask, jsonify, request
+from flask import Flask, json, request
 
 app = Flask(__name__)
+
+## OBS: Não colocar o CORs ele buga o vercel
+
+# MOKANDO OS DADOS
+listaFuncionarios = [
+    {"id": 1, "nomeCompleto": "Teste A", "nomeMae": "Mae Teste A"},
+    {"id": 2, "nomeCompleto": "Teste B", "nomeMae": "Mae Teste B"},
+    {"id": 3, "nomeCompleto": "Teste C", "nomeMae": "Mae Teste C"},
+    {"id": 4, "nomeCompleto": "Teste D", "nomeMae": "Mae Teste D"},
+]
 
 
 @app.route("/")
@@ -20,7 +30,8 @@ def metodo():
         return chamaFuncionarios()
 
     if request.method == "POST":
-        return addFuncionario()
+        # Coleta os dados que vem da request, que no caso é mais um funcionário
+        return addFuncionario(request.get_data())
 
     if request.method == "PUT":
         return metodoPUT()
@@ -33,20 +44,16 @@ def metodo():
 
 
 def chamaFuncionarios():
-    # MOKANDO OS DADOS
-    listaFuncionarios = [
-        {"id": 1, "nomeCompleto": "Teste A", "nomeMae": "Mae Teste A"},
-        {"id": 2, "nomeCompleto": "Teste B", "nomeMae": "Mae Teste B"},
-        {"id": 3, "nomeCompleto": "Teste C", "nomeMae": "Mae Teste C"},
-        {"id": 4, "nomeCompleto": "Teste D", "nomeMae": "Mae Teste D"},
-    ]
-
     return listaFuncionarios
 
 
-def addFuncionario():
-    obj = {"message": "Funcionario Adicionado"}
-    return obj
+def addFuncionario(funcionario):
+
+    funcionario = json.loads(funcionario)
+    # Adicionamos ao dicionario da API
+    listaFuncionarios.append(funcionario)
+
+    return listaFuncionarios
 
 
 def metodoPUT():
