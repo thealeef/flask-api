@@ -24,8 +24,6 @@ def metodo():
     # Tipo de requisição é mostrada
     print("Tipo do Método: ", request.method)
 
-    tipoMetodo = request.method
-
     if request.method == "GET":
         return chamaFuncionarios()
 
