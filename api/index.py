@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 
 
@@ -11,8 +11,31 @@ def Inicio():
     return "API Funcionando"
 
 
-@app.route("/funcionarios")
-def funcionarios():
+@app.route("/funcionarios", methods=["GET", "POST", "PUT", "DELETE"])
+def metodo():
+
+    # Tipo de requisição é mostrada
+    print("Tipo do Método: ", request.method)
+
+    tipoMetodo = request.method
+
+    if request.method == "GET":
+        return chamaFuncionarios()
+
+    if request.method == "POST":
+        return addFuncionario()
+
+    if request.method == "PUT":
+        return metodoPUT()
+
+    if request.method == "DELETE":
+        return delFuncionario()
+
+
+###############################################################################
+
+
+def chamaFuncionarios():
     # MOKANDO OS DADOS
     listaFuncionarios = [
         {"id": 1, "nomeCompleto": "Teste A", "nomeMae": "Mae Teste A"},
@@ -22,3 +45,23 @@ def funcionarios():
     ]
 
     return listaFuncionarios
+
+
+def addFuncionario():
+    obj = {"message": "Funcionario Adicionado"}
+    return obj
+
+
+def metodoPUT():
+    obj = {"message": "Método PUT"}
+    return obj
+
+
+def delFuncionario():
+    obj = {"message": "Funcionario Deletado"}
+    return obj
+
+
+if __name__ == "__main__":
+    # debug=True permite que erros do Python apareçam na página da web.
+    app.run(debug=True)
