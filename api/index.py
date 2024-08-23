@@ -68,15 +68,7 @@ def delFuncionario(funcionario):
     funcionario = json.loads(funcionario)
 
     # Adicionamos ao dicionario da API
-    # listaFuncionarios.remove(funcionario)
-
-    for x in listaFuncionarios:
-
-        if x == funcionario:
-            print("Tem funcionarios iguais.")
-            listaFuncionarios.remove(funcionario)
-        else:
-            print("Não tem funcionarios iguais.")
+    listaFuncionarios.remove(funcionario)
 
     return listaFuncionarios
 
