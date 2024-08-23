@@ -7,10 +7,10 @@ app = Flask(__name__)
 
 # MOKANDO OS DADOS
 listaFuncionarios = [
-    {"id": 1, "nomeCompleto": "Teste A", "nomeMae": "Mae Teste A"},
-    {"id": 2, "nomeCompleto": "Teste B", "nomeMae": "Mae Teste B"},
-    {"id": 3, "nomeCompleto": "Teste C", "nomeMae": "Mae Teste C"},
-    {"id": 4, "nomeCompleto": "Teste D", "nomeMae": "Mae Teste D"},
+    {"id": "1", "nomeCompleto": "Teste A", "nomeMae": "Mae Teste A"},
+    {"id": "2", "nomeCompleto": "Teste B", "nomeMae": "Mae Teste B"},
+    {"id": "3", "nomeCompleto": "Teste C", "nomeMae": "Mae Teste C"},
+    {"id": "4", "nomeCompleto": "Teste D", "nomeMae": "Mae Teste D"},
 ]
 
 
@@ -36,7 +36,7 @@ def metodo():
         return metodoPUT()
 
     if request.method == "DELETE":
-        return delFuncionario()
+        return delFuncionario(request.get_data())
 
 
 ###############################################################################
@@ -48,6 +48,7 @@ def chamaFuncionarios():
 
 def addFuncionario(funcionario):
 
+    # Carrega em Json
     funcionario = json.loads(funcionario)
 
     # Adicionamos ao dicionario da API
@@ -61,9 +62,23 @@ def metodoPUT():
     return obj
 
 
-def delFuncionario():
-    obj = {"message": "Funcionario Deletado"}
-    return obj
+def delFuncionario(funcionario):
+
+    # Carrega em Json
+    funcionario = json.loads(funcionario)
+
+    # Adicionamos ao dicionario da API
+    # listaFuncionarios.remove(funcionario)
+
+    for x in listaFuncionarios:
+
+        if x == funcionario:
+            print("Tem funcionarios iguais.")
+            listaFuncionarios.remove(funcionario)
+        else:
+            print("Não tem funcionarios iguais.")
+
+    return listaFuncionarios
 
 
 if __name__ == "__main__":
