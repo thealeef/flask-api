@@ -65,7 +65,7 @@ def metodoPUT():
 def delFuncionario(funcionario):
 
     # Carrega em Json
-    funcionario = json.loads(funcionario)
+    funcionario = json.dumps(funcionario)
 
     # Adicionamos ao dicionario da API
     listaFuncionarios.remove(funcionario)
