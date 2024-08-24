@@ -1,6 +1,8 @@
-from flask import Flask, json, request
+from flask import Flask, jsonify, request
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 ## OBS: Não colocar o CORs ele buga o vercel
 
@@ -18,7 +20,7 @@ def Inicio():
     return "API Funcionando"
 
 
-@app.route("/funcionarios", methods=["GET", "POST", "PUT", "DELETE"])
+@app.route("/funcionarios", methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"])
 def metodo():
 
     # Tipo de requisição é mostrada
@@ -37,12 +39,15 @@ def metodo():
     if request.method == "DELETE":
         return delFuncionario(request.get_json())
 
+    if request.method == "OPTIONS":
+        return metodoOPTIONS()
+
 
 ###############################################################################
 
 
 def chamaFuncionarios():
-    return listaFuncionarios
+    return jsonify(listaFuncionarios)
 
 
 def addFuncionario(funcionario):
@@ -50,12 +55,17 @@ def addFuncionario(funcionario):
     # Adicionamos ao dicionario da API
     listaFuncionarios.append(funcionario)
 
-    return listaFuncionarios
+    return jsonify(listaFuncionarios)
 
 
 def metodoPUT():
     obj = {"message": "Método PUT"}
-    return obj
+    return jsonify(obj)
+
+
+def metodoOPTIONS():
+    obj = {"message": "Método OPTIONS"}
+    return jsonify(obj)
 
 
 def delFuncionario(funcionario):
@@ -63,7 +73,7 @@ def delFuncionario(funcionario):
     # Removemos ao dicionario da API
     listaFuncionarios.remove(funcionario)
 
-    return listaFuncionarios
+    return jsonify(listaFuncionarios)
 
 
 if __name__ == "__main__":
