@@ -64,8 +64,9 @@ def metodoPUT():
 
 def delFuncionario(funcionario):
 
+    print(type(funcionario))
+    print(funcionario)
     # Carrega em Json
-
     listaFuncionarios.remove(funcionario)
 
     return listaFuncionarios
