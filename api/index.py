@@ -66,10 +66,10 @@ def delFuncionario(funcionario):
 
     # print(type(funcionario))
     # Carrega em Json
-    funcionarioJson = json.loads(funcionario)
+    # funcionarioJson = json.loads(funcionario)
 
     # Adicionamos ao dicionario da API
-    listaFuncionarios.remove(funcionarioJson)
+    listaFuncionarios.remove(funcionario)
 
     return listaFuncionarios
 
