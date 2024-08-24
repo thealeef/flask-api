@@ -64,11 +64,12 @@ def metodoPUT():
 
 def delFuncionario(funcionario):
 
+    # print(type(funcionario))
     # Carrega em Json
-    funcionario = json.dumps(funcionario)
+    funcionarioJson = json.loads(funcionario)
 
     # Adicionamos ao dicionario da API
-    listaFuncionarios.remove(funcionario)
+    listaFuncionarios.remove(funcionarioJson)
 
     return listaFuncionarios
 
