@@ -29,13 +29,13 @@ def metodo():
 
     if request.method == "POST":
         # Coleta os dados que vem da request, que no caso é mais um funcionário
-        return addFuncionario(request.get_data())
+        return addFuncionario(request.get_json())
 
     if request.method == "PUT":
         return metodoPUT()
 
     if request.method == "DELETE":
-        return delFuncionario(request.get_data())
+        return delFuncionario(request.get_json())
 
 
 ###############################################################################
@@ -46,9 +46,6 @@ def chamaFuncionarios():
 
 
 def addFuncionario(funcionario):
-
-    # Carrega em Json
-    funcionario = json.loads(funcionario)
 
     # Adicionamos ao dicionario da API
     listaFuncionarios.append(funcionario)
@@ -63,10 +60,7 @@ def metodoPUT():
 
 def delFuncionario(funcionario):
 
-    # Carrega em Json
-    funcionario = json.loads(funcionario)
-
-    # Adicionamos ao dicionario da API
+    # Removemos ao dicionario da API
     listaFuncionarios.remove(funcionario)
 
     return listaFuncionarios
