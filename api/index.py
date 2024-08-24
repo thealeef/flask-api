@@ -1,5 +1,5 @@
-from flask import Flask, json, request
-
+from flask import Flask, json, jsonify, request
+from flask_cors import CORS
 
 app = Flask(__name__)
 
@@ -36,7 +36,7 @@ def metodo():
         return metodoPUT()
 
     if request.method == "DELETE":
-        return delFuncionario(request.get_json())
+        return delFuncionario(request.get_data())
 
 
 ###############################################################################
@@ -64,9 +64,10 @@ def metodoPUT():
 
 def delFuncionario(funcionario):
 
-    print(type(funcionario))
-    print(funcionario)
     # Carrega em Json
+    funcionario = json.loads(funcionario)
+
+    # Adicionamos ao dicionario da API
     listaFuncionarios.remove(funcionario)
 
     return listaFuncionarios
