@@ -36,7 +36,7 @@ def metodo():
         return metodoPUT()
 
     if request.method == "DELETE":
-        return delFuncionario(request.get_data())
+        return delFuncionario(request.get_json())
 
 
 ###############################################################################
@@ -64,11 +64,8 @@ def metodoPUT():
 
 def delFuncionario(funcionario):
 
-    # print(type(funcionario))
     # Carrega em Json
-    # funcionarioJson = json.loads(funcionario)
 
-    # Adicionamos ao dicionario da API
     listaFuncionarios.remove(funcionario)
 
     return listaFuncionarios
