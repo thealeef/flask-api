@@ -4,6 +4,12 @@ app = Flask(__name__)
 
 ## OBS: Não colocar o CORs ele buga o vercel
 
+
+@app.route("/", methods=["GET"])
+def chama_funcionarios():
+    return jsonify("API Rodando")
+
+
 contador_id = 1
 
 
