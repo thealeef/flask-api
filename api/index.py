@@ -1,77 +1,74 @@
-from flask import Flask, jsonify, request
+from http.client import HTTPException
+import os
+from flask import Flask, json, jsonify, request
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 ## OBS: Não colocar o CORs ele buga o vercel
 
+contador_id = 1
+
+
+def gerador_id():
+    global contador_id
+    novo_id = contador_id
+    contador_id += 1
+    return novo_id
+
+
 # MOKANDO OS DADOS
-listaFuncionarios = [
-    {"id": "1", "nomeCompleto": "Teste A", "nomeMae": "Mae Teste A"},
-    {"id": "2", "nomeCompleto": "Teste B", "nomeMae": "Mae Teste B"},
-    {"id": "3", "nomeCompleto": "Teste C", "nomeMae": "Mae Teste C"},
-    {"id": "4", "nomeCompleto": "Teste D", "nomeMae": "Mae Teste D"},
+funcionarios = [
+    {"id": gerador_id(), "nomeCompleto": "Teste A", "nomeMae": "Mae Teste A"},
+    {"id": gerador_id(), "nomeCompleto": "Teste B", "nomeMae": "Mae Teste B"},
+    {"id": gerador_id(), "nomeCompleto": "Teste C", "nomeMae": "Mae Teste C"},
+    {"id": gerador_id(), "nomeCompleto": "Teste D", "nomeMae": "Mae Teste D"},
 ]
 
 
-@app.route("/")
-def Inicio():
-    return "API Funcionando"
+# Rota GET para obter todos os usuários
+@app.route("/funcionarios", methods=["GET"])
+def chama_funcionarios():
+    return jsonify(funcionarios)
 
 
-@app.route("/funcionarios", methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"])
-def metodo():
+# Adiciona um funcionario com metodo POST
+@app.route("/funcionarios", methods=["POST"])
+def add_funcionario():
+    global funcionarios
 
-    # Tipo de requisição é mostrada
-    print("Tipo do Método: ", request.method)
+    novo_funcionario = request.json
 
-    if request.method == "GET":
-        return chamaFuncionarios()
+    if novo_funcionario in funcionarios:
+        print("tem repitido")
+        jsonify({"erro": "Funcionario já cadastrado"})
+    else:
+        novo_funcionario["id"] = gerador_id()
+        funcionarios.append(novo_funcionario)
 
-    if request.method == "POST":
-        # Coleta os dados que vem da request, que no caso é mais um funcionário
-        return addFuncionario(request.get_json())
-
-    if request.method == "PUT":
-        return metodoPUT()
-
-    if request.method == "DELETE":
-        return delFuncionario(request.get_json())
-
-    if request.method == "OPTIONS":
-        return metodoOPTIONS()
+    return jsonify(funcionarios), 201
 
 
-###############################################################################
+# Rota GET para obter um único usuário pelo ID
+@app.route("/funcionarios/<int:id>", methods=["GET"])
+def chama_funcionario(id):
+    funcionario = next((f for f in funcionarios if f["id"] == id), None)
+
+    if funcionario:
+        return jsonify(funcionario)
+    else:
+        return jsonify({"erro": "Funcionario nao encontrado"}), 404
 
 
-def chamaFuncionarios():
-    return jsonify(listaFuncionarios)
+# Rota DELETE para excluir um usuário pelo ID
+@app.route("/funcionarios/<int:id>", methods=["DELETE"])
+def deletar_funcionario(id):
+    global funcionarios
 
-
-def addFuncionario(funcionario):
-
-    # Adicionamos ao dicionario da API
-    listaFuncionarios.append(funcionario)
-
-    return jsonify(listaFuncionarios)
-
-
-def metodoPUT():
-    obj = {"message": "Método PUT"}
-    return jsonify(obj)
-
-
-def metodoOPTIONS():
-    obj = {"message": "Método OPTIONS"}
-    return jsonify(obj)
-
-
-def delFuncionario(funcionario):
-
-    # Removemos ao dicionario da API
-    listaFuncionarios.remove(funcionario)
-
-    return jsonify(listaFuncionarios)
+    # Filtra os itens, removendo aquele com o ID correspondente
+    funcionarios = [f for f in funcionarios if f["id"] != id]
+    return jsonify({"message": "Item deletado com sucesso"}), 200
 
 
 if __name__ == "__main__":
