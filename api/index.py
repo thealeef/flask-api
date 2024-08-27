@@ -1,6 +1,4 @@
-from http.client import HTTPException
-import os
-from flask import Flask, json, jsonify, request
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 
 app = Flask(__name__)
