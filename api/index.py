@@ -7,6 +7,7 @@ app = Flask(__name__)
 contador_id = 1
 
 
+# Gerador de IDs
 def gerador_id():
     global contador_id
     novo_id = contador_id
