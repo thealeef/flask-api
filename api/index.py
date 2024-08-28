@@ -68,6 +68,27 @@ def deletar_funcionario(id):
     return jsonify({"message": "Item deletado com sucesso"}), 200
 
 
+@app.route("/funcionarios/<int:id>", methods=["PUT"])
+def edit_funcionario(id):
+
+    print(id)
+
+    # Localizar o funcionário pelo ID
+    funcionario = next((f for f in funcionarios if f["id"] == id), None)
+
+    if not funcionario:
+        return jsonify({"error": "Funcionário não encontrado"}), 404
+
+    # Obter os dados JSON da requisição
+    data = request.get_json()
+
+    # Atualizar os campos do funcionário
+    funcionario["nomeCompleto"] = data.get("nomeCompleto", funcionario["nomeCompleto"])
+    funcionario["nomeMae"] = data.get("nomeMae", funcionario["nomeMae"])
+
+    return jsonify(funcionario), 200
+
+
 if __name__ == "__main__":
     # debug=True permite que erros do Python apareçam na página da web.
     app.run(debug=True)
