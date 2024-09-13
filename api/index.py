@@ -72,6 +72,13 @@ funcionarios = [
         "status": 3,
         "cargo": "analista",
     },
+    {
+        "id": gerador_id(),
+        "nomeCompleto": "Demitido Riquelme",
+        "nomeMae": "Maria Sousa",
+        "status": 0,
+        "cargo": "analista",
+    },
 ]
 
 
