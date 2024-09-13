@@ -15,12 +15,42 @@ def gerador_id():
     return novo_id
 
 
+# Funcionarios Cód:
+# 0 = Desligado
+# 1 = Ativo
+# 2 = Afastado
+# 3 = Férias
+
 # MOKANDO OS DADOS
 funcionarios = [
-    {"id": gerador_id(), "nomeCompleto": "Teste A", "nomeMae": "Mae Teste A"},
-    {"id": gerador_id(), "nomeCompleto": "Teste B", "nomeMae": "Mae Teste B"},
-    {"id": gerador_id(), "nomeCompleto": "Teste C", "nomeMae": "Mae Teste C"},
-    {"id": gerador_id(), "nomeCompleto": "Teste D", "nomeMae": "Mae Teste D"},
+    {
+        "id": gerador_id(),
+        "nomeCompleto": "Rivelino Oliveira",
+        "nomeMae": "Maria Oliveira",
+        "status": 1,
+        "cargo": "gerente",
+    },
+    {
+        "id": gerador_id(),
+        "nomeCompleto": "Henrique Bastos",
+        "nomeMae": "Marcia Bastos",
+        "status": 1,
+        "cargo": "coordernador",
+    },
+    {
+        "id": gerador_id(),
+        "nomeCompleto": "Carlos Alberto Conde",
+        "nomeMae": "Solange Alberto Conde",
+        "status": 1,
+        "cargo": "analista",
+    },
+    {
+        "id": gerador_id(),
+        "nomeCompleto": "Felipe Henrique de Sousa",
+        "nomeMae": "Cristina de Sousa",
+        "status": 1,
+        "cargo": "estagiario",
+    },
 ]
 
 
