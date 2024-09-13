@@ -49,7 +49,28 @@ funcionarios = [
         "nomeCompleto": "Felipe Henrique de Sousa",
         "nomeMae": "Cristina de Sousa",
         "status": 1,
-        "cargo": "estagiario",
+        "cargo": "auxiliar",
+    },
+    {
+        "id": gerador_id(),
+        "nomeCompleto": "Adalberto Queiroz",
+        "nomeMae": "Leticia Queiroz",
+        "status": 2,
+        "cargo": "auxiliar",
+    },
+    {
+        "id": gerador_id(),
+        "nomeCompleto": "Cris Figueira",
+        "nomeMae": "Laura Figueira",
+        "status": 3,
+        "cargo": "analista",
+    },
+    {
+        "id": gerador_id(),
+        "nomeCompleto": "Alef Rib",
+        "nomeMae": "Eli de Sousa",
+        "status": 3,
+        "cargo": "analista",
     },
 ]
 
