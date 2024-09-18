@@ -39,13 +39,6 @@ funcionarios = [
     },
     {
         "id": gerador_id(),
-        "nomeCompleto": "Carlos Alberto Conde",
-        "nomeMae": "Solange Alberto Conde",
-        "status": 1,
-        "cargo": "analista",
-    },
-    {
-        "id": gerador_id(),
         "nomeCompleto": "Felipe Henrique de Sousa",
         "nomeMae": "Cristina de Sousa",
         "status": 1,
@@ -74,8 +67,8 @@ funcionarios = [
     },
     {
         "id": gerador_id(),
-        "nomeCompleto": "Demitido Riquelme",
-        "nomeMae": "Maria Sousa",
+        "nomeCompleto": "Alonso Riquelme",
+        "nomeMae": "Maria Riquelme",
         "status": 0,
         "cargo": "analista",
     },
